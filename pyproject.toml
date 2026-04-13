@@ -12,3 +12,6 @@ dependencies = [
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
+filterwarnings = [
+    "ignore::pandas.errors.Pandas4Warning",
+]

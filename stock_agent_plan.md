@@ -97,6 +97,7 @@ All settings driven by environment variables with sane defaults:
 - Use `yfinance.Ticker(symbol).history(period="60d", interval="1d")` for daily OHLCV
 - 60 days of history ensures enough data for RSI(14) and SMA(50) without edge cases
 - Fetch all watchlist tickers once at startup and cache in a dict — signal tools reuse the same DataFrames without additional network calls
+- Cache fetched DataFrames on disk (e.g. `data/cache/{ticker}.parquet`) with a 1-hour TTL: on load, check the file's mtime and skip the network call if it is less than 3600 seconds old
 - Validate each DataFrame has at least 50 rows and no NaN close prices before passing to signal functions
 - Wrap fetches in a retry decorator (3 attempts, exponential backoff) — yfinance can return empty DataFrames during rate limiting
 
